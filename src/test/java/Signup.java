@@ -10,21 +10,21 @@ public class Signup {
     WebElement txtFirstName;
     @FindBy(id = "lastName")
     WebElement txtLastName;
-    @FindBy(id = "userName")
+    @FindBy(id = "username")
     WebElement txtUserName;
     @FindBy(name = "Passwd")
     WebElement txtPassword;
     @FindBy(name = "ConfirmPasswd")
     WebElement txtConfirmPasswd;
-    @FindBy(id = "spanMessage")
-    WebElement spanMessage;
+    @FindBy(xpath = "//input[@id='i3']")
+    WebElement btnCheckBox;
     @FindBy(xpath = "//button[@type='button']")
     List<WebElement> btnNext;
 
     public Signup(WebDriver driver){
         PageFactory.initElements(driver,this);
     }
-    public void doSignup(DataTable dataTable) {
+    public void doSignup(DataTable dataTable) throws InterruptedException {
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
         String firstName = data.get(0).get("firstname");
         txtFirstName.sendKeys(firstName);
@@ -36,9 +36,9 @@ public class Signup {
         txtPassword.sendKeys(Password);
         String ConfirmPassword = data.get(0).get("confirmPassword");
         txtConfirmPasswd.sendKeys(ConfirmPassword);
-    }
-    public String getErrorMessage(){
-        return spanMessage.getText();
+        btnCheckBox.click();
+        btnNext.get(1).click();
+
     }
 
 }

@@ -20,14 +20,14 @@ public class StepDefinitions {
         driver.get("https://accounts.google.com/signup?hl=en");
     }
     @When("user inputs invalid data on signup page")
-    public void user_inputs_invalid_data_on_signup_page(DataTable dataTable) {
+    public void user_inputs_invalid_data_on_signup_page(DataTable dataTable) throws InterruptedException {
         signup = new Signup(driver);
         signup.doSignup(dataTable);
     }
     @Then("User registration should be unsuccessful")
     public void user_registration_should_be_unsuccessful() {
-        signup = new Signup(driver);
-        String text = signup.getErrorMessage();
+        //signup = new Signup(driver);
+        //String text = signup.getErrorMessage();
         //Assert.assertEquals(text, "Invalid credentials");
         //driver.close();
     }
