@@ -1,3 +1,5 @@
+package Pages;
+
 import io.cucumber.datatable.DataTable;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.*;
@@ -16,29 +18,35 @@ public class Signup {
     WebElement txtPassword;
     @FindBy(name = "ConfirmPasswd")
     WebElement txtConfirmPasswd;
-    @FindBy(xpath = "//input[@id='i3']")
-    WebElement btnCheckBox;
     @FindBy(xpath = "//button[@type='button']")
     List<WebElement> btnNext;
+    @FindBy(xpath = "//span[contains(text(),'Use 8 characters or more for your password')]")
+    WebElement firstSpanText;
+    @FindBy(xpath = "//span[contains(text(),'Please choose a stronger password. Try a mix of le')]")
+    WebElement secondSpanText;
 
     public Signup(WebDriver driver){
+
         PageFactory.initElements(driver,this);
     }
-    public void doSignup(DataTable dataTable) throws InterruptedException {
-        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
-        String firstName = data.get(0).get("firstname");
+    public void doSignup(DataTable dataTable) {
+        Map<String,String> data = dataTable.asMap(String.class, String.class);
+        String firstName = data.get("firstname");
         txtFirstName.sendKeys(firstName);
-        String lastName = data.get(0).get("lastname");
+        String lastName = data.get("lastname");
         txtLastName.sendKeys(lastName);
-        String userName = data.get(0).get("username");
+        String userName = data.get("username");
         txtUserName.sendKeys(userName);
-        String Password = data.get(0).get("password");
+        String Password = data.get("password");
         txtPassword.sendKeys(Password);
-        String ConfirmPassword = data.get(0).get("confirmPassword");
+        String ConfirmPassword = data.get("confirmPassword");
         txtConfirmPasswd.sendKeys(ConfirmPassword);
-        btnCheckBox.click();
         btnNext.get(1).click();
-
     }
-
+    public String firstErrorMessage(){
+        return firstSpanText.getText();
+    }
+    public String secondErrorMessage(){
+        return secondSpanText.getText();
+    }
 }
