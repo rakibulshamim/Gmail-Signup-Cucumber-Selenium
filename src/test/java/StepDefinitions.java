@@ -1,10 +1,7 @@
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-import org.junit.Assert;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.chrome.*;
 
 import java.time.Duration;
 
@@ -21,20 +18,17 @@ public class StepDefinitions {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         driver.get("https://accounts.google.com/signup?hl=en");
-        //throw new io.cucumber.java.PendingException();
     }
-    @When("user inputs {string}, {string}, {string} and {string}")
-    public void user_inputs_and(String firstname, String lastname, String username, String password) {
+    @When("user inputs invalid data on signup page")
+    public void user_inputs_invalid_data_on_signup_page(DataTable dataTable) {
         signup = new Signup(driver);
-        signup.doSignup(firstname,lastname, username, password);
-        //throw new io.cucumber.java.PendingException();
+        signup.doSignup(dataTable);
     }
-    @Then("user can not Sign up")
-    public void user_can_not_sign_up() {
+    @Then("User registration should be unsuccessful")
+    public void user_registration_should_be_unsuccessful() {
         signup = new Signup(driver);
         String text = signup.getErrorMessage();
         //Assert.assertEquals(text, "Invalid credentials");
         //driver.close();
-        //throw new io.cucumber.java.PendingException();
     }
 }

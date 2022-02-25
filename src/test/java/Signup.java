@@ -1,9 +1,9 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import io.cucumber.datatable.DataTable;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.*;
 
 import java.util.List;
+import java.util.Map;
 
 public class Signup {
     @FindBy(id = "firstName")
@@ -12,10 +12,10 @@ public class Signup {
     WebElement txtLastName;
     @FindBy(id = "userName")
     WebElement txtUserName;
-    //@FindBy(xpath = "//input[@type='password']")
-    //List<WebElement> txtPassword;
     @FindBy(name = "Passwd")
     WebElement txtPassword;
+    @FindBy(name = "ConfirmPasswd")
+    WebElement txtConfirmPasswd;
     @FindBy(id = "spanMessage")
     WebElement spanMessage;
     @FindBy(xpath = "//button[@type='button']")
@@ -24,11 +24,18 @@ public class Signup {
     public Signup(WebDriver driver){
         PageFactory.initElements(driver,this);
     }
-    public void doSignup(String firstname, String lastname, String username, String password) {
-        txtFirstName.sendKeys(firstname);
-        txtLastName.sendKeys(lastname);
-        txtUserName.sendKeys(username);
-        txtPassword.sendKeys(password);
+    public void doSignup(DataTable dataTable) {
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        String firstName = data.get(0).get("firstname");
+        txtFirstName.sendKeys(firstName);
+        String lastName = data.get(0).get("lastname");
+        txtLastName.sendKeys(lastName);
+        String userName = data.get(0).get("username");
+        txtUserName.sendKeys(userName);
+        String Password = data.get(0).get("password");
+        txtPassword.sendKeys(Password);
+        String ConfirmPassword = data.get(0).get("confirmPassword");
+        txtConfirmPasswd.sendKeys(ConfirmPassword);
     }
     public String getErrorMessage(){
         return spanMessage.getText();
