@@ -12,7 +12,7 @@ Feature: Signup to Gmail
     Examples:
       | firstname | lastname |  username    | password | confirmPassword |
       | Rakibul   | Shamim   | rakibulshmm  | 1234     | 1234            |
-      | Karim     | Mia      | karimmia4041 | abc@123  | abc@123         |
+      | Karim     | Mia      | karimmia4041 | abc123   | abc123          |
       | Faruk     | Hasan    | farukhsn580  | khn#456  | khn#456         |
 
 
@@ -27,7 +27,7 @@ Feature: Signup to Gmail
 
     Then User registration should be unsuccessful again
     Examples:
-      | firstname | lastname |  username    | password  | confirmPassword |
-      | Tarek     | Sarkar   | tarekskr047  | 12345678  | 12345678        |
-      | Ripon     | Khan     | riopkhan3654 | 987654321 | 987654321       |
-      | Faysal    | Mahmud   | faysalmhd489 | 123456789 | 123456789       |
+      | firstname | lastname |  username    | password   | confirmPassword |
+      | Tarek     | Sarkar   | tarekskr047  | 12345678   | 12345678        |
+      | Ripon     | Khan     | riopkhan3654 | 987654321  | 987654321       |
+      | Faysal    | Mahmud   | faysalmhd489 | 1234567890 | 1234567890      |
